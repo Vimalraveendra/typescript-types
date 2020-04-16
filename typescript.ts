@@ -84,7 +84,7 @@ interface RobotArmy {
 let fightRobotArmy = (robots: RobotArmy) => {
   // this interface RobotArmy is going to make sure that the
   // robots parmater that i'm recieving is going to have  count
-  // that has type of number , name of type strin & magic of type string.
+  // that has type of number , name of type string & magic of type string.
   // otherwise  its kind of throw an error. this might be useful for react & props
   console.log("fight");
 };
@@ -106,6 +106,101 @@ type FavouritePet = {
   name: string;
 };
 
+// main difference between interface and a type
+//one difference is that interface create a new name that we can use
+// everywhere  such as RobotArmy by exporting & importing it.
+// type alias don't create a new name
 let mostFavouritePets = (pets: FavouritePet) => {
   console.log("petssss");
 };
+
+// type assertions
+// type assertions entire script allows  you to override a type  in any
+// way you want .
+
+interface CatArmy {
+  count: number;
+  name: string;
+  magic: string;
+}
+//here I am saying hey dog, i'm telling you that don't worry about it
+//this is catArmy regardless of the fact that dog actually doesn't have
+// dog dot count. I'm overriding whatever errors you are going to give
+//me  & telling you that  trust me  this is a CatArmy.
+let dog = {} as CatArmy;
+dog.count;
+
+// optional type
+// optional type can be just say a question mark and now
+// this question mark says this may or may not  happens
+// so in here the magic property may or may not happens
+
+interface DogArmy {
+  count: number;
+  name: string;
+  magic?: string;
+}
+
+let fightRobotArmy3 = (robots: DogArmy) => {
+  console.log("fight3");
+};
+
+fightRobotArmy3({ count: 1, name: "hello" });
+
+// functions
+
+let fightRobotArmy4 = (robots: DogArmy): void => {
+  // in here the function type is going to be void
+  // because we are not returning anyting
+  console.log("fight3");
+};
+
+let fightRobotArmy5 = (robots: DogArmy): number => {
+  // in here the function type is going to be number
+  // because we are  returning a number
+  console.log("fight3");
+  return 10;
+};
+
+let fightRobotArmy6 = (robots: DogArmy): string => {
+  // in here the function type is going to be string
+  // because we are  returning a string
+  console.log("fight3");
+  return "hello";
+};
+
+// class
+// cool thing in typescript we can set the property to private or public
+
+class Animal {
+  public sing: string = "lalallalallalalla";
+  constructor(sound: string) {
+    this.sing = sound;
+  }
+  greet(): string {
+    return `Hello ${this.sing}`;
+  }
+  greetings = (): string => {
+    return `Hello welcome sound${this.sing}`;
+  };
+}
+
+let lion = new Animal("Rawwwrrrr");
+lion.greet();
+lion.greetings();
+lion.sing;
+
+//union
+//union type can be used define types using the OR syntax
+// it could be string or  could be number or boolean
+
+let confuse: string | number = 10;
+
+// type inference
+//type inference are used to provide type  information  where there
+//is  no explicit mentioning of type
+// typescript is smart enough  to know or infer  & say do you mean
+// a number or do you mean a string.
+
+let x = 10;
+x = "hello";
